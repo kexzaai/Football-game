@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Kexza Football 3D</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="screen active">
+  <div class="start-content">
+    <div class="game-logo">
+      <div class="logo-ball">⚽</div>
+      <h1>KEXZA</h1>
+      <h2>FOOTBALL 3D</h2>
+    </div>
+    <div class="team-select">
+      <h3>SELECT YOUR TEAM</h3>
+      <div class="teams">
+        <div class="team-btn active" data-team="red" onclick="selectTeam('red')">
+          <div class="team-color" style="background:#e74c3c"></div>
+          <span>RED HAWKS</span>
+        </div>
+        <div class="team-btn" data-team="blue" onclick="selectTeam('blue')">
+          <div class="team-color" style="background:#3498db"></div>
+          <span>BLUE STORM</span>
+        </div>
+        <div class="team-btn" data-team="green" onclick="selectTeam('green')">
+          <div class="team-color" style="background:#2ecc71"></div>
+          <span>GREEN FORCE</span>
+        </div>
+      </div>
+    </div>
+    <div class="difficulty-select">
+      <h3>DIFFICULTY</h3>
+      <div class="diff-btns">
+        <button class="diff-btn active" data-diff="easy" onclick="selectDiff('easy')">EASY</button>
+        <button class="diff-btn" data-diff="medium" onclick="selectDiff('medium')">MEDIUM</button>
+        <button class="diff-btn" data-diff="hard" onclick="selectDiff('hard')">HARD</button>
+      </div>
+    </div>
+    <button class="start-btn" onclick="startGame()">KICK OFF!</button>
+  </div>
+</div>
+
+<!-- GAME OVER SCREEN -->
+<div id="gameOverScreen" class="screen">
+  <div class="gameover-content">
+    <h1 id="gameOverTitle">FULL TIME!</h1>
+    <div class="final-score">
+      <span id="finalScore">0 - 0</span>
+    </div>
+    <p id="gameOverMsg">Match Over</p>
+    <button class="start-btn" onclick="restartGame()">PLAY AGAIN</button>
+    <button class="start-btn secondary" onclick="showStart()">MAIN MENU</button>
+  </div>
+</div>
+
+<!-- GAME UI -->
+<div id="gameUI" class="hidden">
+  <!-- Top HUD -->
+  <div id="hud">
+    <div class="hud-team" id="hudPlayer">
+      <span class="team-dot" id="playerDot"></span>
+      <span id="playerScore">0</span>
+    </div>
+    <div class="hud-center">
+      <div id="timer">1:30</div>
+      <div id="matchStatus">1st Half</div>
+    </div>
+    <div class="hud-team" id="hudAI">
+      <span id="aiScore">0</span>
+      <span class="team-dot" id="aiDot"></span>
+    </div>
+  </div>
+
+  <!-- Stamina Bar -->
+  <div id="staminaBar">
+    <div class="stamina-label">⚡</div>
+    <div class="stamina-track">
+      <div id="staminaFill"></div>
+    </div>
+  </div>
+
+  <!-- Pause Button -->
+  <button id="pauseBtn" onclick="togglePause()">⏸</button>
+
+  <!-- Switch Player -->
+  <button id="switchBtn" onclick="switchPlayer()">🔄</button>
+
+  <!-- Left Joystick -->
+  <div id="joystickZone">
+    <div id="joystickBase">
+      <div id="joystickKnob"></div>
+    </div>
+  </div>
+
+  <!-- Right Action Buttons -->
+  <div id="actionButtons">
+    <div class="action-row top-row">
+      <button class="action-btn sprint-btn" id="sprintBtn">⚡<br><small>SPRINT</small></button>
+    </div>
+    <div class="action-row bottom-row">
+      <button class="action-btn tackle-btn" id="tackleBtn">💪<br><small>TACKLE</small></button>
+      <button class="action-btn pass-btn" id="passBtn">↗<br><small>PASS</small></button>
+      <button class="action-btn shoot-btn" id="shootBtn">🥅<br><small>SHOOT</small></button>
+    </div>
+  </div>
+
+  <!-- Goal Banner -->
+  <div id="goalBanner" class="hidden">
+    <div class="goal-text">⚽ GOAL! ⚽</div>
+  </div>
+
+  <!-- Pause Overlay -->
+  <div id="pauseOverlay" class="hidden">
+    <div class="pause-menu">
+      <h2>PAUSED</h2>
+      <button onclick="togglePause()">RESUME</button>
+      <button onclick="restartGame()">RESTART</button>
+      <button onclick="showStart()">MENU</button>
+    </div>
+  </div>
+</div>
+
+<!-- Canvas -->
+<canvas id="gameCanvas"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="touchControls.js"></script>
+<script src="physics.js"></script>
+<script src="ball.js"></script>
+<script src="player.js"></script>
+<script src="ai.js"></script>
+<script src="ui.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
